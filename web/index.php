@@ -8,6 +8,6 @@ class Hello {
 }
 
 $hello = new Hello();
-echo($hello->sayHi());
+echo("TESTTTTT : " . $hello->sayHi());
 
 ?>
