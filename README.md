@@ -4,8 +4,8 @@ demo_php_cd
 Demo for php
 
 
-* How tu run
+* How to run ?
 
-```
-$vendor/bin/phpunit
-```
+  ```
+  $vendor/bin/phpunit
+  ```
