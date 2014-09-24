@@ -2,15 +2,17 @@
 class HelloUnitTest extends PHPUnit_Framework_TestCase {
 
 	function testHello() {
+		//Arrange
 		$hello = new Hello();
-		$this->assertEquals("Hello World", $hello->sayHi());
-	}
+		$expectedResult = "Hello World";
 
-	function testHello2() {
-		$hello = new Hello();
-		$this->assertEquals("Hello World", $hello->sayHi());
+		//Act
+		$actualResult = $hello->sayHi();
+
+		//Assert
+		$this->assertEquals($expectedResult, $actualResult);
 	}
 
 }
-
 ?>
+
