@@ -6,4 +6,7 @@ class Hello {
 	}
 
 }
+
+echo "<input type='text'/>";
+
 ?>
