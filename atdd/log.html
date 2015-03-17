@@ -5,7 +5,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="-1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta content="Robot Framework 2.8.5 (Python 2.7.6 on darwin)" name="Generator">
+<meta content="Robot Framework 2.8.7 (Python 2.7.6 on darwin)" name="Generator">
 <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAAAIAAAAAAAAAAAAAEAAAAAAAAAAAAAAAJEBoACtnfgA5cYYAERsiAEx2lAAbKkQAcazBACZCVwAcM1cAK0ucAAMDBQAnQncASG+FABkoVQAyWmgA6f8SgvH/Ij99+GLyIinyJfn/Yi//KSLzUy9iZogpIld3/4JVVTkid7vyUjNVNVJEAGOZ6Z7pXwAABpmZkRiLAAAGiJZpmGAAAEEt3SXdxAAATC7o/u3EAAC8MRZpjasAAAY1VVVTYAAABKqqqqpAAAAADKqq4AAAAAAAv4sAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMADAADgAwAA4AcAAOAHAADgBwAAwAcAAOAHAADgDwAA8A8AAPg/AAD+fwAA">
 <style media="all" type="text/css">
 /* Generic and misc styles */
@@ -213,6 +213,8 @@ th.stats-col-graph:hover {
 }
 </style>
 <style media="all" type="text/css">
+/* Icons are from Open Iconic <https://useiconic.com/open/>.
+   Licensed under the MIT License. */
 /* Containers */
 .suite, .test, #errors {
     border: 1px solid gray;
@@ -225,9 +227,6 @@ th.stats-col-graph:hover {
 #errors, .messages, .metadata {
     width: 100%;
     border-spacing: 0;
-}
-#errors td, .messages td, .metadata th, .metadata td {
-    padding: 0.2em;
 }
 .children {
     display: none;
@@ -243,51 +242,88 @@ th.stats-col-graph:hover {
 .element-header {
     border: 1px solid transparent;
     border-radius: 2px;
-    padding: 0.3em 6.5em 0.3em 1.4em;
-    background-repeat: no-repeat;
-    background-position: left center;
-    background-image: url(data:image/gif;base64,R0lGODlhDQALAIAAAAAAAAAAACH5BAEKAAEALAAAAAANAAsAAAIZTICpYGz/nIOxUShvPU1ZroHTlYWlJi1LAQA7);
+    position: relative;
 }
 .element-header:hover {
     cursor: pointer;
     background-color: #ECECF7;
     border-color: #BCBCD7;
 }
-.closed {
-    background-image: url(data:image/gif;base64,R0lGODlhDQALAIAAAAAAAAAAACH5BAEKAAEALAAAAAANAAsAAAIZTICpYGz/nIOxwXls3VJpDGpiRlKfyS1LAQA7);
+.element-header-toggle {
+    position: absolute;
+    left: 3px;
+    top: 4px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAQAAABKxSfDAAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfeCR0JChSkZz20AAAAGklEQVQI12NgQAKMDKzInP8IDhOqMk4G7AAANQwBE427PYUAAAAASUVORK5CYII=);
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPgogIDxwYXRoIGQ9Ik0wIDB2Mmg4di0yaC04eiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAzKSIgLz4KPC9zdmc+), none;
+    height: 10px;
+    width: 10px;
+    background-size: 6px 6px;
+    border: 1px solid black;
+    border-radius: 2px;
+}
+.closed > .element-header-toggle {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAQAAABKxSfDAAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfeCR0JCDHdVYtxAAAAM0lEQVQI103MMQqAMBQFwVHyITaB3P+W1sKzSBC3mW6hRFw0pUB5DvF1bu9FN0RM3X/wAk98CUnvFTakAAAAAElFTkSuQmCC);
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPgogIDxwYXRoIGQ9Ik0zIDB2M2gtM3YyaDN2M2gydi0zaDN2LTJoLTN2LTNoLTJ6IiAvPgo8L3N2Zz4=), none;
+}
+.element-header:hover > .element-header-toggle {
+    background-color: yellow;
+}
+.element-header-right:hover ~ .element-header-toggle {
+    background-color: transparent;
+}
+.element-header-left {
+    padding: 3px 80px 3px 20px;
+}
+.element-header-right {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 3px;
+    cursor: default;
 }
 .name {
     font-weight: bold;
 }
+.elapsed {
+    float: right;
+    color: #808080;
+    padding-left: 1em;
+}
+.link {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAHlJREFUGJVtzrEJwmAQBtCn6ASuIKTIBhY2gmghBiJYB1udwk10B8FJbKMBcQFbtbkfJHrVwfu+4/idJR64Y9H7E3higj5O3S8Y44ApLnjhnXCNGhV2yNGggDJwiC02gavUbpDFvscRo4QdXOMKDHBufz3HLYKzNn4AbSkV3fncGQYAAAAASUVORK5CYII=);
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPgogIDxwYXRoIGQ9Ik01Ljg4LjAzYy0uMTguMDEtLjM2LjAzLS41My4wOS0uMjcuMS0uNTMuMjUtLjc1LjQ3YS41LjUgMCAxIDAgLjY5LjY5Yy4xMS0uMTEuMjQtLjE3LjM4LS4yMi4zNS0uMTIuNzgtLjA3IDEuMDYuMjIuMzkuMzkuMzkgMS4wNCAwIDEuNDRsLTEuNSAxLjVjLS40NC40NC0uOC40OC0xLjA2LjQ3LS4yNi0uMDEtLjQxLS4xMy0uNDEtLjEzYS41LjUgMCAxIDAtLjUuODhzLjM0LjIyLjg0LjI1Yy41LjAzIDEuMi0uMTYgMS44MS0uNzhsMS41LTEuNWMuNzgtLjc4Ljc4LTIuMDQgMC0yLjgxLS4yOC0uMjgtLjYxLS40NS0uOTctLjUzLS4xOC0uMDQtLjM4LS4wNC0uNTYtLjAzem0tMiAyLjMxYy0uNS0uMDItMS4xOS4xNS0xLjc4Ljc1bC0xLjUgMS41Yy0uNzguNzgtLjc4IDIuMDQgMCAyLjgxLjU2LjU2IDEuMzYuNzIgMi4wNi40Ny4yNy0uMS41My0uMjUuNzUtLjQ3YS41LjUgMCAxIDAtLjY5LS42OWMtLjExLjExLS4yNC4xNy0uMzguMjItLjM1LjEyLS43OC4wNy0xLjA2LS4yMi0uMzktLjM5LS4zOS0xLjA0IDAtMS40NGwxLjUtMS41Yy40LS40Ljc1LS40NSAxLjAzLS40NC4yOC4wMS40Ny4wOS40Ny4wOWEuNS41IDAgMSAwIC40NC0uODhzLS4zNC0uMi0uODQtLjIyeiIKICAvPgo8L3N2Zz4=), none;
+}
 .expand {
-    float: right;
-    margin-right: -6em;
-    font-size: 0.8em;
-    width: 7em;
-    padding: 0.3em 0 0.1em 0;
-    text-align: center;
-    color: #808080 !important;
-    border-radius: 8px;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAADtJREFUGJVjYCACKDAwMByA0ljFDjAwMPxnYGB4ABVQgLL/Q+VQBB6gseGmIivCkERXhFUSWRFOSawAAEl7E3uv1iMcAAAAAElFTkSuQmCC);
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPgogIDxwYXRoIGQ9Ik0xLjUgMGwtMS41IDEuNSA0IDQgNC00LTEuNS0xLjUtMi41IDIuNS0yLjUtMi41eiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCAxKSIgLz4KPC9zdmc+), none;
 }
-.expand:hover {
-    text-decoration: none;
-    background-color: #BBBBFF;
-    color: black !important;
+.collapse {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAC5JREFUGJVjYCARNEAxTsn/UIyhCFkSQxG6ThQ+C5IpjWhG1yNb4YDFTdjEMAEACi8Q++9Y9TAAAAAASUVORK5CYII=);
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPgogIDxwYXRoIGQ9Ik00IDBsLTQgNCAxLjUgMS41IDIuNS0yLjUgMi41IDIuNSAxLjUtMS41LTQtNHoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgMSkiIC8+Cjwvc3ZnPg==), none;
 }
-.ext-link, .ext-link:link, .ext-link:visited {
-    float: right;
-    margin-right: -7em;
-    padding: 0 0.3em;
-    color: #C60F0F;
-    text-decoration: none;
+.expand, .collapse, .link {
+    float: left;
+    display: block;
     visibility: hidden;
+    margin: 0 4px;
+    height: 14px;
+    width: 14px;
+    background-size: 8px 8px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 1px solid black;
+    border-radius: 2px;
 }
-.element-header:hover .ext-link {
+.link {
+    background-size: 10px 10px;
+}
+.element-header:hover a {
     visibility: visible;
 }
-.ext-link:hover {
-    background: #C60F0F;
-    color: #ECECF7;
+.expand:hover, .collapse:hover, .link:hover {
+    background-color: yellow;
 }
 /* Messages and errors */
 .messages {
@@ -295,7 +331,7 @@ th.stats-col-graph:hover {
     font-size: 1.1em;
 }
 .message-row {
-    height: 17px;
+    height: 20px;
 }
 .time {
     width: 8em;
@@ -308,16 +344,26 @@ th.stats-col-graph:hover {
     width: 4.5em;
     text-align: center;
 }
-.select-text {
-    width: 2em;
-    background-position: top right;
+.select-message {
+    width: 24px;
+}
+.select-message > div {
+    float: right;
+    margin-right: 2px;
+    height: 16px;
+    width: 16px;
+    background-size: 12px 12px;
     background-repeat: no-repeat;
+    background-position: center;
 }
-.message-row:hover .select-text {
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAV1BMVEXq7/atw9u6zOHS3uvA0eP3+fvZ4+7g6PHO2+n5+vz1+PvAwMC+z+KQkJDx9fm1yd/s8ffa5O/I1+fU4Oz////t8vf6+/3c5fC4y+Dj6vPv8/ju8/fd5vA594LsAAAAXklEQVQYlW3PVxKAIAwE0NhLRGxY0Puf05hRCIzvjx2yAVAYUIBLAAFNKhgKIBHoiP3klU10Y3s6zs47uHR3Zt4iRmoORGlWFX9rbS5YCgbNLvf0d2R0wQqs/YL4+ze2IArI2yb6sQAAAABJRU5ErkJggg==);
+.message-row:hover .select-message div {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAQAAAD8fJRsAAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfeCR0MOzhWKZQOAAAASUlEQVQY032PsRHAIAwDX9BkicD+W8UMEqegAQJWKZ/+3sLZJhFGQEZzNaIa4ibh66En867VNaIeoP5WppNuIGoAlOm3g5VC1AdYeQv1BZPRSgAAAABJRU5ErkJggg==);
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCA4IDgiPgogIDxwYXRoIGQ9Ik0wIDB2MWg4di0xaC04em0wIDJ2MWg2di0xaC02em0wIDJ2MWg4di0xaC04em0wIDJ2MWg2di0xaC02eiIgLz4KPC9zdmc+), none;
+    border: 1px solid black;
+    border-radius: 2px;
 }
-.message-row:hover .select-text:hover {
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAV1BMVEXv833O26y1yc+tw9v5+m/c5Zjq74T1+HTx9Xrt8oDU4KPAwE3//2b3+XLa5JvS3qfs8YHg6JOQkDrd5pbZ45zj6o6+z8O6zMnu8376+27I17TA0cC4y8w8SaSaAAAAXklEQVQYlW3PWQ6AIAwE0LpVsSqK+3L/c4qNQiG+PyZ0CmAoYICaAAGpVVA2wExAG1SHN+XRjeLp2BZv5tLLqXmLGEk4EKV6aP/WwinYI/UpG93T35HOBTuy8gvi798gGQzuN7QrSQAAAABJRU5ErkJggg==);
+.select-message:hover div {
+    background-color: yellow;
     cursor: pointer;
 }
 /* Message tables - these MUST NOT be combined together because otherwise
@@ -333,6 +379,10 @@ th.stats-col-graph:hover {
     width: 12.5em;
     text-align: left;
     white-space: nowrap;
+    padding: 0;
+}
+.metadata td {
+    padding: 0.2em;
 }
 .keyword-metadata {
     font-size: 0.9em;
@@ -435,6 +485,12 @@ a:link, a:visited {
 }
 .doc pre {
     font-size: 1.1em;
+    letter-spacing: 0.05em;
+    background: #F4F4FF;
+}
+.doc code {
+    padding: 0 0.2em;
+    letter-spacing: 0.05em;
     background: #F4F4FF;
 }
 .doc li {
@@ -488,6 +544,37 @@ function drawCallback(element, childElement, childrenNames) {
         });
     }
 }
+function expandSuite(suite) {
+    if (suite.status == "PASS")
+        expandElement(suite);
+    else
+        expandCriticalFailed(suite);
+}
+function expandElement(item) {
+    var element = $('#' + item.id);
+    var children = element.children('.children');
+    // .css is faster than .show and .show w/ callback is terribly slow
+    children.css({'display': 'block'});
+    populateChildren(item.id, children, item.childrenNames);
+    element.children('.element-header').removeClass('closed');
+}
+function expandElementWithId(elementid) {
+    expandElement(window.testdata.findLoaded(elementid));
+}
+function expandCriticalFailed(element) {
+    if (element.status == "FAIL") {
+        window.elementsToExpand = [element];
+        window.expandDecider = function (e) {
+            return e.status == "FAIL" && (e.isCritical === undefined || e.isCritical);
+        };
+        expandRecursively();
+    }
+}
+function expandAll(elementId) {
+    window.elementsToExpand = [window.testdata.findLoaded(elementId)];
+    window.expandDecider = function () { return true; };
+    expandRecursively();
+}
 function expandRecursively() {
     if (!window.elementsToExpand.length)
         return;
@@ -507,40 +594,14 @@ function expandRecursively() {
             setTimeout(expandRecursively, 0);
     });
 }
-function expandElement(item) {
-    var element = $('#' + item.id);
-    var children = element.children('.children');
-    // .css is faster than .show and .show w/ callback is terribly slow
-    children.css({'display': 'block'});
-    populateChildren(item.id, children, item.childrenNames);
-    element.children('.element-header').removeClass('closed');
-}
-function expandElementWithId(elementid) {
-    expandElement(window.testdata.findLoaded(elementid));
-}
-function elementHiddenByUser(elementId) {
-    var element = $("#"+elementId);
+function elementHiddenByUser(id) {
+    var element = $('#' + id);
     return !element.is(":visible");
 }
-function expandAllChildren(elementId) {
-    window.elementsToExpand = [window.testdata.findLoaded(elementId)];
-    window.expandDecider = function () { return true; };
-    expandRecursively();
-}
-function expandCriticalFailed(element) {
-    if (element.status == "FAIL") {
-        window.elementsToExpand = [element];
-        window.expandDecider = function (e) {
-            return e.status == "FAIL" && (e.isCritical === undefined || e.isCritical);
-        };
-        expandRecursively();
-    }
-}
-function expandSuite(suite) {
-    if (suite.status == "PASS")
-        expandElement(suite);
-    else
-        expandCriticalFailed(suite);
+function collapseAll(id) {
+    var element = $('#' + id);
+    element.find('.children').css({'display': 'none'});
+    element.find('.element-header').addClass('closed');
 }
 function logLevelSelected(level) {
     var anchors = getViewAnchorElements();
@@ -1044,7 +1105,7 @@ window.util = function () {
     }
     function Matcher(pattern) {
         pattern = regexpEscape(normalize(pattern));
-        var rePattern = '^' + pattern.replace(/\\\?/g, ".").replace(/\\\*/g, ".*") + '$';
+        var rePattern = '^' + pattern.replace(/\\\?/g, '.').replace(/\\\*/g, '[\\s\\S]*') + '$';
         var regexp = new RegExp(rePattern);
         function matches(string) {
             return regexp.test(normalize(string));
@@ -1170,6 +1231,7 @@ window.util = function () {
         escape: escape,
         unescape: unescape,
         normalize: normalize,
+        regexpEscape: regexpEscape,
         Matcher: Matcher,
         formatParentName: formatParentName,
         timeFromDate: timeFromDate,
@@ -1616,28 +1678,28 @@ function stopPropagation(event) {
 window.output = {};
 </script>
 <script type="text/javascript">
-window.output["suite"] = [1,2,3,0,[],[0,0,4347],[],[[4,0,1,0,[],[0,171,4175,5],[[0,6,0,7,8,[1,172,3916],[],[[172,2,9]]],[0,10,0,11,12,[1,4088,127],[],[[4089,2,13]]],[0,10,0,11,14,[0,4216,79],[[0,15,0,16,0,[1,4228,63],[],[[4290,2,17]]]],[[4217,2,18],[4295,4,5]]],[2,19,0,20,0,[1,4295,50],[],[]]]]],[],[1,0,1,0]];
+window.output["suite"] = [1,2,3,0,[],[1,0,4712],[],[[4,0,1,0,[],[1,98,4614],[[0,5,0,6,7,[1,99,4022],[],[[99,2,8]]],[0,9,0,10,11,[1,4122,173],[],[[4122,2,12]]],[0,9,0,10,13,[1,4296,165],[],[[4296,2,14]]],[0,15,0,16,17,[1,4461,162],[],[[4461,2,18]]],[0,19,0,20,21,[1,4623,35],[],[]],[2,22,0,23,0,[1,4659,52],[],[]]]]],[],[1,1,1,1]];
 </script>
 <script type="text/javascript">
 window.output["strings"] = [];
 </script>
 <script type="text/javascript">
-window.output["strings"] = window.output["strings"].concat(["*","*Login Pass","*/Users/somkiat/data/slide/ci-cd/demo/thaibev/demo_php_cd/atdd/login_pass.txt","*login_pass.txt","*Login pass","*ValueError: Element locator 'password' did not match any elements.","*Selenium2Library.Open Browser","*<p>Opens a new browser instance to given URL.\x3c/p>","eNqzSVTIKEpNs1XKKCkpsNLXz8lPTszJyC8usbIEAv3y1CSgUHpmnl5BRoGSHRGKbPQT7QDe4h0A","*Opening browser 'firefox' to base url '<a href=\"http://localhost:9999/web/login.php\">http://localhost:9999/web/login.php\x3c/a>'","*Selenium2Library.Input Text","*<p>Types the given `text` into text field identified by `locator`.\x3c/p>","*username, demo","*Typing text 'demo' into text field 'username'","*password, ok","*Selenium2Library.Capture Page Screenshot","*<p>Takes a screenshot of the current page and embeds it into the log.\x3c/p>","*\x3c/td>\x3c/tr><tr><td colspan=\"3\"><a href=\"selenium-screenshot-1.png\"><img src=\"selenium-screenshot-1.png\" width=\"800px\">\x3c/a>","*Typing text 'ok' into text field 'password'","*Selenium2Library.Close Browser","*<p>Closes the current browser.\x3c/p>"]);
+window.output["strings"] = window.output["strings"].concat(["*","*Login Pass","*/Users/somkiat/data/slide/ci-cd/demo/thaibev/demo_php_cd/atdd/login_pass.txt","*login_pass.txt","*Login pass","*Selenium2Library.Open Browser","*<p>Opens a new browser instance to given URL.\x3c/p>","eNqzSVTIKEpNs1XKKCkpsNLXz8lPTszJyC8usbIEAv3y1CSgUHpmnl5BRoGSHRGKbPQT7QDe4h0A","*Opening browser 'firefox' to base url '<a href=\"http://localhost:9999/web/login.php\">http://localhost:9999/web/login.php\x3c/a>'","*Selenium2Library.Input Text","*<p>Types the given `text` into text field identified by `locator`.\x3c/p>","*username, demo","*Typing text 'demo' into text field 'username'","*password, ok","*Typing text 'ok' into text field 'password'","*Selenium2Library.Click Button","*<p>Clicks a button identified by `locator`.\x3c/p>","*Login","*Clicking button 'Login'.","*Selenium2Library.Wait Until Page Contains","*<p>Waits until `text` appears on current page.\x3c/p>","*Welcome to my world","*Selenium2Library.Close Browser","*<p>Closes the current browser.\x3c/p>"]);
 </script>
 <script type="text/javascript">
-window.output["generatedTimestamp"] = "20150317 11:41:38 GMT +07:00";
+window.output["generatedTimestamp"] = "20150317 11:48:04 GMT +07:00";
 </script>
 <script type="text/javascript">
 window.output["errors"] = [];
 </script>
 <script type="text/javascript">
-window.output["stats"] = [[{"elapsed":"00:00:04","fail":1,"label":"Critical Tests","pass":0},{"elapsed":"00:00:04","fail":1,"label":"All Tests","pass":0}],[],[{"elapsed":"00:00:04","fail":1,"id":"s1","label":"Login Pass","name":"Login Pass","pass":0}]];
+window.output["stats"] = [[{"elapsed":"00:00:05","fail":0,"label":"Critical Tests","pass":1},{"elapsed":"00:00:05","fail":0,"label":"All Tests","pass":1}],[],[{"elapsed":"00:00:05","fail":0,"id":"s1","label":"Login Pass","name":"Login Pass","pass":1}]];
 </script>
 <script type="text/javascript">
-window.output["generatedMillis"] = 3627;
+window.output["generatedMillis"] = 4260;
 </script>
 <script type="text/javascript">
-window.output["baseMillis"] = 1426567294373;
+window.output["baseMillis"] = 1426567679740;
 </script>
 <script type="text/javascript">
 window.settings = {"defaultLevel":"INFO","minLevel":"INFO","reportURL":"report.html","splitLogBase":"log","title":""};
@@ -1702,18 +1764,19 @@ function drawErrorsRecursively(errors, target) {
     $.tmpl('errorTemplate', elements).appendTo(target);
     if (errors.hasNext())
         setTimeout(function () { drawErrorsRecursively(errors, target); }, 0);
-    else
-        scrollToHash();
+    else {
+        // Errors may have moved scroll position. Resetting location re-scrolls.
+        if (window.location.hash)
+            window.location.replace(window.location.hash);
+        highlightLinkTarget();
+    }
 }
 
-function scrollToHash() {
-    if (window.location.hash)
-        setTimeout(function () {
-            var id = window.location.hash.substring(1);
-            window.location.hash = '#';
-            window.location.hash = id;
-            highlight($('#' + id));
-        }, 0);
+function highlightLinkTarget() {
+    if (window.location.hash) {
+        var target = $(window.location.hash);
+        highlight(target);
+    }
 }
 
 function highlight(element, color) {
@@ -1740,7 +1803,7 @@ function makeElementVisible(id) {
         if (ids.length) {
             expandCriticalFailed(window.testdata.findLoaded(util.last(ids)));
             window.location.hash = id;
-            scrollToHash();
+            highlightLinkTarget();
         }
     });
 }
@@ -1764,7 +1827,7 @@ function addTestExecutionLog(main) {
 
 <script type="text/x-jquery-tmpl" id="tagStatisticsRowTemplate">
   <tr class="row-${$item.index}">
-    <td class="stats-col-name" title="${doc}">
+    <td class="stats-col-name" title="{{html doc}}">
       <div class="stat-name">
         <span>{{html label}}</span>
         {{if info}}(${info}){{/if}}
@@ -1781,7 +1844,7 @@ function addTestExecutionLog(main) {
 
 <script type="text/x-jquery-tmpl" id="suiteStatisticsRowTemplate">
   <tr onclick="makeElementVisible('${id}')" class="row-${$item.index}">
-    <td class="stats-col-name" title="${label}">
+    <td class="stats-col-name" title="{{html label}}">
       <div class="stat-name">
         <a href="#${id}"><span class="parent-name">{{html formatParentName}}</span>{{html name}}</a>
       </div>
@@ -1806,21 +1869,26 @@ function addTestExecutionLog(main) {
     </td>
     <td class="${level.toLowerCase()} level">${level}</td>
     <td class="message">{{html text}}</td>
-    <td class="select-text" onclick="javascript:selectMessage('${id}')"
-        title="Select message text"></td>
+    <td class="select-message" onclick="javascript:selectMessage('${id}')" title="Select message text">
+      <div></div>
+    </td>
   </tr>
 </script>
 
 <script type="text/x-jquery-tmpl" id="suiteTemplate">
   <div id="${id}" class="suite">
-    <div class="element-header closed" onclick="toggleSuite('${id}')" title="{{html fullName}}">
-      <span class="${status.toLowerCase()}">TEST SUITE: </span>
-      <span class="name">{{html name}}</span>
-      <a class="expand" title="Expand this suite fully"
-         href="javascript:expandAllChildren('${id}')"
-         onclick="stopPropagation(event)">Expand All</a>
-      <a class="ext-link" title="Link to this suite" href="#${id}"
-         onclick="makeElementVisible('${id}'); stopPropagation(event)">&para;</a>
+    <div class="element-header closed" onclick="toggleSuite('${id}')">
+      <div class="element-header-left" title="{{html fullName}}">
+        <span class="elapsed" title="Elapsed time">${times.elapsedTime}</span>
+        <span class="${status.toLowerCase()}">TEST SUITE: </span>
+        <span class="name">{{html name}}</span>
+      </div>
+      <div class="element-header-right" onclick="stopPropagation(event)" title="">
+        <a class="expand" title="Expand all" href="javascript:expandAll('${id}')"></a>
+        <a class="collapse" title="Collapse all" href="javascript:collapseAll('${id}')"></a>
+        <a class="link" title="Link to this suite" href="#${id}" onclick="makeElementVisible('${id}')"></a>
+      </div>
+      <div class="element-header-toggle" title="Toggle visibility"></div>
     </div>
     <div class="children">
       <table class="metadata">
@@ -1871,15 +1939,19 @@ function addTestExecutionLog(main) {
 
 <script type="text/x-jquery-tmpl" id="testTemplate">
   <div id="${id}" class="test">
-    <div class="element-header closed" onclick="toggleTest('${id}')" title="{{html fullName}}">
-      <span class="${status.toLowerCase()}">TEST CASE: </span>
-      <span class="name">{{html name}}</span>
-      {{if !isCritical}}(non-critical){{/if}}
-      <a class="expand" title="Expand this test fully"
-         href="javascript:expandAllChildren('${id}')"
-         onclick="stopPropagation(event)">Expand All</a>
-      <a class="ext-link" title="Link to this test" href="#${id}"
-         onclick="makeElementVisible('${id}'); stopPropagation(event)">&para;</a>
+    <div class="element-header closed" onclick="toggleTest('${id}')">
+      <div class="element-header-left" title="{{html fullName}}">
+        <span class="elapsed" title="Elapsed time">${times.elapsedTime}</span>
+        <span class="${status.toLowerCase()}">TEST CASE: </span>
+        <span class="name">{{html name}}</span>
+        {{if !isCritical}}(non-critical){{/if}}
+      </div>
+      <div class="element-header-right" onclick="stopPropagation(event)" title="">
+        <a class="expand" title="Expand all" href="javascript:expandAll('${id}')"></a>
+        <a class="collapse" title="Collapse all" href="javascript:collapseAll('${id}')"></a>
+        <a class="link" title="Link to this test" href="#${id}" onclick="makeElementVisible('${id}')"></a>
+      </div>
+      <div class="element-header-toggle" title="Toggle visibility"></div>
     </div>
     <div class="children">
       <table class="metadata">
@@ -1926,15 +1998,19 @@ function addTestExecutionLog(main) {
 
 <script type="text/x-jquery-tmpl" id="keywordTemplate">
   <div id="${id}" class="keyword">
-    <div class="element-header closed" onclick="toggleKeyword('${id}')" title="${name}">
-      <span class="${status.toLowerCase()}">${type}: </span>
-      <span class="name">{{html name}}</span>
-      <span class="arg">{{html arguments}}</span>
-      <a class="expand" title="Expand this keyword fully"
-         href="javascript:expandAllChildren('${id}')"
-         onclick="stopPropagation(event)">Expand All</a>
-      <a class="ext-link" title="Link to this keyword" href="#${id}"
-         onclick="makeElementVisible('${id}'); stopPropagation(event)">&para;</a>
+    <div class="element-header closed" onclick="toggleKeyword('${id}')">
+      <div class="element-header-left" title="{{html name}}">
+        <span class="elapsed" title="Elapsed time">${times.elapsedTime}</span>
+        <span class="${status.toLowerCase()}">${type}: </span>
+        <span class="name">{{html name}}</span>
+        <span class="arg">{{html arguments}}</span>
+      </div>
+      <div class="element-header-right" onclick="stopPropagation(event)">
+        <a class="expand" title="Expand all" href="javascript:expandAll('${id}')"></a>
+        <a class="collapse" title="Collapse all" href="javascript:collapseAll('${id}')"></a>
+        <a class="link" title="Link to this keyword" href="#${id}" onclick="makeElementVisible('${id}')"></a>
+      </div>
+      <div class="element-header-toggle" title="Toggle visibility"></div>
     </div>
     <div class="children">
       <table class="metadata keyword-metadata">
@@ -1965,8 +2041,9 @@ function addTestExecutionLog(main) {
       <td class="time">${time}</td>
       <td class="${level.toLowerCase()} level">${level}</td>
       <td class="message">{{html text}}</td>
-      <td class="select-text" onclick="javascript:selectMessage('${id}')"
-          title="Select message text"></td>
+      <td class="select-message" onclick="javascript:selectMessage('${id}')" title="Select message text">
+        <div></div>
+      </td>
     </tr>
   </table>
 </script>

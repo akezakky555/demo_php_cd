@@ -5,7 +5,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="-1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta content="Robot Framework 2.8.5 (Python 2.7.6 on darwin)" name="Generator">
+<meta content="Robot Framework 2.8.7 (Python 2.7.6 on darwin)" name="Generator">
 <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAAAIAAAAAAAAAAAAAEAAAAAAAAAAAAAAAJEBoACtnfgA5cYYAERsiAEx2lAAbKkQAcazBACZCVwAcM1cAK0ucAAMDBQAnQncASG+FABkoVQAyWmgA6f8SgvH/Ij99+GLyIinyJfn/Yi//KSLzUy9iZogpIld3/4JVVTkid7vyUjNVNVJEAGOZ6Z7pXwAABpmZkRiLAAAGiJZpmGAAAEEt3SXdxAAATC7o/u3EAAC8MRZpjasAAAY1VVVTYAAABKqqqqpAAAAADKqq4AAAAAAAv4sAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMADAADgAwAA4AcAAOAHAADgBwAAwAcAAOAHAADgDwAA8A8AAPg/AAD+fwAA">
 <style media="all" type="text/css">
 /* Generic and misc styles */
@@ -496,6 +496,12 @@ a:link, a:visited {
 }
 .doc pre {
     font-size: 1.1em;
+    letter-spacing: 0.05em;
+    background: #F4F4FF;
+}
+.doc code {
+    padding: 0 0.2em;
+    letter-spacing: 0.05em;
     background: #F4F4FF;
 }
 .doc li {
@@ -923,7 +929,7 @@ window.util = function () {
     }
     function Matcher(pattern) {
         pattern = regexpEscape(normalize(pattern));
-        var rePattern = '^' + pattern.replace(/\\\?/g, ".").replace(/\\\*/g, ".*") + '$';
+        var rePattern = '^' + pattern.replace(/\\\?/g, '.').replace(/\\\*/g, '[\\s\\S]*') + '$';
         var regexp = new RegExp(rePattern);
         function matches(string) {
             return regexp.test(normalize(string));
@@ -1049,6 +1055,7 @@ window.util = function () {
         escape: escape,
         unescape: unescape,
         normalize: normalize,
+        regexpEscape: regexpEscape,
         Matcher: Matcher,
         formatParentName: formatParentName,
         timeFromDate: timeFromDate,
@@ -1516,25 +1523,25 @@ storage = function () {
 window.output = {};
 </script>
 <script type="text/javascript">
-window.output["suite"] = [1,2,3,0,[],[0,0,4347],[],[[4,0,1,0,[],[0,171,4175,5],[]]],[],[1,0,1,0]];
+window.output["suite"] = [1,2,3,0,[],[1,0,4712],[],[[4,0,1,0,[],[1,98,4614],[]]],[],[1,1,1,1]];
 </script>
 <script type="text/javascript">
 window.output["strings"] = [];
 </script>
 <script type="text/javascript">
-window.output["strings"] = window.output["strings"].concat(["*","*Login Pass","*/Users/somkiat/data/slide/ci-cd/demo/thaibev/demo_php_cd/atdd/login_pass.txt","*login_pass.txt","*Login pass","*ValueError: Element locator 'password' did not match any elements."]);
+window.output["strings"] = window.output["strings"].concat(["*","*Login Pass","*/Users/somkiat/data/slide/ci-cd/demo/thaibev/demo_php_cd/atdd/login_pass.txt","*login_pass.txt","*Login pass"]);
 </script>
 <script type="text/javascript">
-window.output["generatedTimestamp"] = "20150317 11:41:38 GMT +07:00";
+window.output["generatedTimestamp"] = "20150317 11:48:04 GMT +07:00";
 </script>
 <script type="text/javascript">
-window.output["stats"] = [[{"elapsed":"00:00:04","fail":1,"label":"Critical Tests","pass":0},{"elapsed":"00:00:04","fail":1,"label":"All Tests","pass":0}],[],[{"elapsed":"00:00:04","fail":1,"id":"s1","label":"Login Pass","name":"Login Pass","pass":0}]];
+window.output["stats"] = [[{"elapsed":"00:00:05","fail":0,"label":"Critical Tests","pass":1},{"elapsed":"00:00:05","fail":0,"label":"All Tests","pass":1}],[],[{"elapsed":"00:00:05","fail":0,"id":"s1","label":"Login Pass","name":"Login Pass","pass":1}]];
 </script>
 <script type="text/javascript">
-window.output["generatedMillis"] = 3627;
+window.output["generatedMillis"] = 4260;
 </script>
 <script type="text/javascript">
-window.output["baseMillis"] = 1426567294373;
+window.output["baseMillis"] = 1426567679740;
 </script>
 <script type="text/javascript">
 window.settings = {"background":{"fail":"#FF3333","nonCriticalFail":"#99FF66","pass":"#99FF66"},"logURL":"log.html","title":""};
@@ -1624,7 +1631,7 @@ function addCustomSortersForDetails() {
 function showDetailsByHash() {
     // Cannot use window.location.hash because Firefox incorrectly decodes it:
     // http://stackoverflow.com/questions/1703552/encoding-of-window-location-hash
-    var hash = window.location.href.split('#').splice(1).join('#');
+    var hash = window.location.href.split('#').slice(1).join('#');
     if (!hash || hash == window.prevLocationHash)
         return;
     var parts = hash.split('?');
@@ -1968,7 +1975,7 @@ function hideHiddenDetailsColumns(elem) {
 
 <script type="text/x-jquery-tmpl" id="tagStatisticsRowTemplate">
   <tr onclick="tagDetailSelected('${label}')" class="row-${$item.index}">
-    <td class="stats-col-name" title="${doc}">
+    <td class="stats-col-name" title="{{html doc}}">
       <div class="stat-name">
         <a href="#tags?${label}">{{html label}}</a>
         {{if info}}(${info}){{/if}}
@@ -1986,7 +1993,7 @@ function hideHiddenDetailsColumns(elem) {
 
 <script type="text/x-jquery-tmpl" id="suiteStatisticsRowTemplate">
   <tr onclick="suiteDetailSelected('${id}')" class="row-${$item.index}">
-    <td class="stats-col-name" title="${label}">
+    <td class="stats-col-name" title="{{html label}}">
       <div class="stat-name">
         <a href="#suites?${id}"><span class="parent-name">{{html formatParentName}}</span>{{html name}}</a>
       </div>
@@ -2174,7 +2181,7 @@ function hideHiddenDetailsColumns(elem) {
               precedence, from highest to lowest, is <em>AND</em>, <em>OR</em>,
               <em>NOT</em>. See <em>Simple patterns</em> and
               <em>Tag patterns</em> sections in
-              <a href="https://code.google.com/p/robotframework/wiki/UserGuide">Robot
+              <a href="http://robotframework.org/robotframework/#user-guide">Robot
               Framework User Guide</a> version 2.8.4 or newer for more details.
             </p>
             <table class="search-help-examples">
