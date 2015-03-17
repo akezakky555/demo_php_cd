@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generated="20150317 11:41:34.372" generator="Robot 2.8.5 (Python 2.7.6 on darwin)">
+<suite source="/Users/somkiat/data/slide/ci-cd/demo/thaibev/demo_php_cd/atdd/login_pass.txt" id="s1" name="Login Pass">
+<test id="s1-t1" name="Login pass">
+<kw type="kw" name="Selenium2Library.Open Browser">
+<doc>Opens a new browser instance to given URL.</doc>
+<arguments>
+<arg>http://localhost:9999/web/login.php</arg>
+</arguments>
+<msg timestamp="20150317 11:41:34.545" level="INFO">Opening browser 'firefox' to base url 'http://localhost:9999/web/login.php'</msg>
+<status status="PASS" endtime="20150317 11:41:38.461" starttime="20150317 11:41:34.545"></status>
+</kw>
+<kw type="kw" name="Selenium2Library.Input Text">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>username</arg>
+<arg>demo</arg>
+</arguments>
+<msg timestamp="20150317 11:41:38.462" level="INFO">Typing text 'demo' into text field 'username'</msg>
+<status status="PASS" endtime="20150317 11:41:38.588" starttime="20150317 11:41:38.461"></status>
+</kw>
+<kw type="kw" name="Selenium2Library.Input Text">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>password</arg>
+<arg>ok</arg>
+</arguments>
+<msg timestamp="20150317 11:41:38.590" level="INFO">Typing text 'ok' into text field 'password'</msg>
+<kw type="kw" name="Selenium2Library.Capture Page Screenshot">
+<doc>Takes a screenshot of the current page and embeds it into the log.</doc>
+<arguments>
+</arguments>
+<msg timestamp="20150317 11:41:38.663" html="yes" level="INFO">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-1.png"&gt;&lt;img src="selenium-screenshot-1.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" endtime="20150317 11:41:38.664" starttime="20150317 11:41:38.601"></status>
+</kw>
+<msg timestamp="20150317 11:41:38.668" level="FAIL">ValueError: Element locator 'password' did not match any elements.</msg>
+<status status="FAIL" endtime="20150317 11:41:38.668" starttime="20150317 11:41:38.589"></status>
+</kw>
+<kw type="teardown" name="Selenium2Library.Close Browser">
+<doc>Closes the current browser.</doc>
+<arguments>
+</arguments>
+<status status="PASS" endtime="20150317 11:41:38.718" starttime="20150317 11:41:38.668"></status>
+</kw>
+<doc></doc>
+<tags>
+</tags>
+<status status="FAIL" endtime="20150317 11:41:38.719" critical="yes" starttime="20150317 11:41:34.544">ValueError: Element locator 'password' did not match any elements.</status>
+</test>
+<doc></doc>
+<metadata>
+</metadata>
+<status status="FAIL" endtime="20150317 11:41:38.720" starttime="20150317 11:41:34.373"></status>
+</suite>
+<statistics>
+<total>
+<stat fail="1" pass="0">Critical Tests</stat>
+<stat fail="1" pass="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat fail="1" pass="0" id="s1" name="Login Pass">Login Pass</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

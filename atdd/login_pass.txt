@@ -1,0 +1,12 @@
+*** Settings **
+Library    Selenium2Library
+Test Teardown    Close Browser
+
+
+*** Testcases ***
+Login pass
+	Open Browser     http://localhost:9999/web/login.php
+	Input Text    username    demo
+	Input Text    password     ok
+	Click Button    Login
+	Wait Until Page Contains  Welcome to my world
